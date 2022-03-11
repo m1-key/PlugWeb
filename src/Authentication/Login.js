@@ -10,9 +10,8 @@ import {
 } from "firebase/auth";
 import { auth } from "../firebase-config";
 
-const Register = () => {
+const Login = () => {
   let navigate = useNavigate();
-  console.log("Register");
   const [userName, setUserName] = useState();
   const [password, setPassword] = useState();
   const [user, setUser] = useState({});
@@ -27,14 +26,13 @@ const Register = () => {
   const onFinish = async (values) => {
     setUserName(values.username);
     setPassword(values.password);
-    console.log("Inside register");
     try {
-      const user = await createUserWithEmailAndPassword(
+      const user = await signInWithEmailAndPassword(
         auth,
         values.username,
         values.password
       );
-      console.log(user);
+      //console.log(user);
       navigate("/profile");
     } catch (err) {
       console.log(err.message);
@@ -105,4 +103,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Login;
